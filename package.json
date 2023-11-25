@@ -1,0 +1,46 @@
+{
+    "name": "pharmacy-management-api",
+    "description": "",
+    "version": "1.0.0",
+    "author": "DN <dnamkaa@gmail.com>",
+    "contributors": [],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dnamkaa/pharmacy-management-api.git"
+    },
+    "bugs": "http://github.com/dnamkaa/pharmacy-management-api/issues",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org"
+    },
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "express": "^4.18.2",
+        "mysql": "^2.18.1",
+        "pg": "^8.11.3",
+        "postgres": "^3.4.3",
+        "swagger-jsdoc": "^6.2.8",
+        "swagger-ui-express": "^5.0.0",
+        "swaggerize-express": "^3.0.3",
+        "swagmock": "~0.0.2"
+    },
+    "devDependencies": {
+        "eslint": "^8.51.0",
+        "is-my-json-valid": "^2.13.1",
+        "istanbul": "~0.4.3",
+        "js-yaml": "^3.2.6",
+        "knex": "^3.0.1",
+        "supertest": "^6.3.3",
+        "swagger-parser": "^3.4.1",
+        "tape": "^4"
+    },
+    "scripts": {
+        "test": "tape 'tests/**/*.js'",
+        "cover": "istanbul cover tape -- 'tests/**/*.js'",
+        "lint": "eslint .",
+        "regenerate": "yo swaggerize:test --framework express --apiPath './config/swagger.yaml'"
+    },
+    "generator-swaggerize": {
+        "version": "4.1.0"
+    },
+    "main": "./server"
+}

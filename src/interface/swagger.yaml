@@ -1,0 +1,237 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Pharmacy Management API
+  description: >-
+    API for managing pharmacy operations, including inventory management,
+    prescription processing, billing, and reporting.
+paths:
+  /api/inventory:
+    get:
+      summary: Get inventory list
+      description: Retrieve a list of medications in the pharmacy's inventory.
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                medicationName:
+                  type: string
+                stockLevel:
+                  type: integer
+    post:
+      summary: Add a new medication to inventory
+      description: Add a new medication to the pharmacy's inventory.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              medicationName:
+                type: string
+              stockLevel:
+                type: integer
+              expirationDate:
+                type: string
+                format: date
+      responses:
+        '201':
+          description: Medication added successfully
+          schema:
+            type: object
+            properties:
+              medicationId:
+                type: integer
+  '/api/inventory/{medicationId}':
+    get:
+      summary: Get medication details
+      description: Retrieve details of a specific medication by ID.
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              medicationName:
+                type: string
+              stockLevel:
+                type: integer
+              expirationDate:
+                type: string
+                format: date
+        '404':
+          description: Medication not found
+    put:
+      summary: Update medication details
+      description: Update the details of a specific medication by ID.
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              medicationName:
+                type: string
+              stockLevel:
+                type: integer
+              expirationDate:
+                type: string
+                format: date
+      responses:
+        '200':
+          description: Medication updated successfully
+        '404':
+          description: Medication not found
+    delete:
+      summary: Delete medication
+      description: Delete a specific medication by ID.
+      parameters:
+        - name: medicationId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Medication deleted successfully
+        '404':
+          description: Medication not found
+  /api/prescriptions:
+    get:
+      summary: Get prescription list
+      description: Retrieve a list of prescriptions.
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: Create a new prescription
+      description: Create a new prescription for a patient.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              patientName:
+                type: string
+              medication:
+                type: string
+              dosage:
+                type: string
+      responses:
+        '201':
+          description: Prescription created successfully
+          schema:
+            type: object
+            properties:
+              prescriptionId:
+                type: integer
+  '/api/prescriptions/{prescriptionId}':
+    get:
+      summary: Get prescription details
+      description: Retrieve details of a specific prescription by ID.
+      parameters:
+        - name: prescriptionId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: object
+            properties:
+              patientName:
+                type: string
+              medication:
+                type: string
+              dosage:
+                type: string
+        '404':
+          description: Prescription not found
+    put:
+      summary: Update prescription details
+      description: Update the details of a specific prescription by ID.
+      parameters:
+        - name: prescriptionId
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              patientName:
+                type: string
+              medication:
+                type: string
+              dosage:
+                type: string
+      responses:
+        '200':
+          description: Prescription updated successfully
+        '404':
+          description: Prescription not found
+    delete:
+      summary: Delete prescription
+      description: Delete a specific prescription by ID.
+      parameters:
+        - name: prescriptionId
+          in: path
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: Prescription deleted successfully
+        '404':
+          description: Prescription not found
+  /api/billing:
+    post:
+      summary: Add a new billing record
+      description: Add a new billing record for a transaction.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              transactionId:
+                type: integer
+              amount:
+                type: number
+              date:
+                type: string
+                format: date
+      responses:
+        '201':
+          description: Billing record added successfully
+          schema:
+            type: object
+            properties:
+              billingRecordId:
+                type: integer
+  /api/reports:
+    get:
+      summary: Get reports
+      description: Retrieve various reports.
+      responses:
+        '200':
+          description: Successful response

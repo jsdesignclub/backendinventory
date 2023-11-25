@@ -1,0 +1,367 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Pharmacy Management API",
+    "version": "1.0.0",
+    "description": "API for managing pharmacy operations, including inventory management, prescription processing, billing, and reporting."
+  },
+  "paths": {
+    "/api/inventory": {
+      "get": {
+        "summary": "Get inventory list",
+        "description": "Retrieve a list of medications in the pharmacy's inventory.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "example": [
+                  {
+                    "medicationName": "Medication A",
+                    "stockLevel": 100
+                  },
+                  {
+                    "medicationName": "Medication B",
+                    "stockLevel": 75
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new medication to inventory",
+        "description": "Add a new medication to the pharmacy's inventory.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "newMedication": {
+                  "value": {
+                    "medicationName": "New Medication",
+                    "stockLevel": 50,
+                    "expirationDate": "2023-12-31T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Medication added successfully",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "medicationAdded": {
+                    "value": {
+                      "medicationId": 123
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/inventory/{medicationId}": {
+      "get": {
+        "summary": "Get medication details",
+        "description": "Retrieve details of a specific medication by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "medicationId",
+            "required": true,
+            "description": "ID of the medication",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "medicationDetails": {
+                    "value": {
+                      "medicationName": "Medication A",
+                      "stockLevel": 100,
+                      "expirationDate": "2023-12-31T00:00:00.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Medication not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update medication details",
+        "description": "Update the details of a specific medication by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "medicationId",
+            "required": true,
+            "description": "ID of the medication",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "updatedMedication": {
+                  "value": {
+                    "medicationName": "Medication A",
+                    "stockLevel": 120,
+                    "expirationDate": "2023-12-31T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Medication updated successfully"
+          },
+          "404": {
+            "description": "Medication not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete medication",
+        "description": "Delete a specific medication by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "medicationId",
+            "required": true,
+            "description": "ID of the medication",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Medication deleted successfully"
+          },
+          "404": {
+            "description": "Medication not found"
+          }
+        }
+      }
+    },
+    "/api/prescriptions": {
+      "get": {
+        "summary": "Get prescription list",
+        "description": "Retrieve a list of prescriptions.",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new prescription",
+        "description": "Create a new prescription for a patient.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "newPrescription": {
+                  "value": {
+                    "patientName": "John Doe",
+                    "medication": "Medication A",
+                    "dosage": "1 tablet per day"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Prescription created successfully",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "prescriptionCreated": {
+                    "value": {
+                      "prescriptionId": 456
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/prescriptions/{prescriptionId}": {
+      "get": {
+        "summary": "Get prescription details",
+        "description": "Retrieve details of a specific prescription by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "prescriptionId",
+            "required": true,
+            "description": "ID of the prescription",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "prescriptionDetails": {
+                    "value": {
+                      "patientName": "John Doe",
+                      "medication": "Medication A",
+                      "dosage": "1 tablet per day"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Prescription not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update prescription details",
+        "description": "Update the details of a specific prescription by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "prescriptionId",
+            "required": true,
+            "description": "ID of the prescription",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "updatedPrescription": {
+                  "value": {
+                    "patientName": "John Doe",
+                    "medication": "Medication B",
+                    "dosage": "2 tablets per day"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Prescription updated successfully"
+          },
+          "404": {
+            "description": "Prescription not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete prescription",
+        "description": "Delete a specific prescription by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "prescriptionId",
+            "required": true,
+            "description": "ID of the prescription",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Prescription deleted successfully"
+          },
+          "404": {
+            "description": "Prescription not found"
+          }
+        }
+      }
+    },
+    "/api/billing": {
+      "post": {
+        "summary": "Add a new billing record",
+        "description": "Add a new billing record for a transaction.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "examples": {
+                "newBillingRecord": {
+                  "value": {
+                    "transactionId": 789,
+                    "amount": 50,
+                    "date": "2023-12-31T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Billing record added successfully",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "billingRecordAdded": {
+                    "value": {
+                      "billingRecordId": 789
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reports": {
+      "get": {
+        "summary": "Get reports",
+        "description": "Retrieve various reports.",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    }
+  }
+}
