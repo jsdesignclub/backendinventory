@@ -27,6 +27,14 @@ module.exports = {
     }catch(error){
       throw error;
     }
+  },
+
+  updateById: async (medicineId,updatedData) => {
+    try{
+      await knex('medicines').where({id:medicineId}).update(updatedData);
+    }catch(error){
+      throw error;
+    }
   }
 
 };

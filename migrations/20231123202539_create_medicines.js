@@ -6,10 +6,10 @@
 exports.up = function (knex) {
     return knex.schema.createTable('medicines', function (table) {
       table.increments('id').primary();
-      table.string('name').notNullable();
+      table.string('medicationName').notNullable();
       table.string('manufacturer').notNullable();
       table.string('category').notNullable();
-      table.integer('quantity').notNullable();
+      table.integer('stockLevel').notNullable();
       table.date('expiration_date').notNullable();
       table.timestamps(true, true);
     });
