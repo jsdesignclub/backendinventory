@@ -44,8 +44,8 @@ getInventoryById: async (req, res, next) => {
   updateMedicine: async (req,res,next) => {
     try{
       const medicineId = req.params.medicationId;
-      const stockLevel = req.body;
-      await medicineModel.updateById(medicineId,stockLevel);
+      const updatedInfo = req.body;
+      await medicineModel.updateById(medicineId,updatedInfo);
       res.status(201).json('Medicine updated successful!')
     }catch(error){
       next(error);
