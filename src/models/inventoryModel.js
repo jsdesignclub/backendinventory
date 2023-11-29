@@ -21,6 +21,17 @@ module.exports = {
     }
   },
 
+
+getMedicineById: async(medicineId) => {
+  try {
+    const medicines = await knex.select('*').from('medicines').where('id',medicineId);
+    return medicines;
+  } catch (error) {
+    throw error
+  }
+},
+
+
   deleteMedicine: async (medicineId) => {
     try{
       await knex('medicines').where({id:medicineId}).del();
