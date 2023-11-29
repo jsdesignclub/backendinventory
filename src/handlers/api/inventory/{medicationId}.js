@@ -33,15 +33,7 @@ module.exports = {
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 200;
-        var provider = dataProvider['put']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        return inventoryController.updateMedicine(req,res,next);
     },
     /**
      * summary: Delete medication
