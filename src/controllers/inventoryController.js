@@ -18,5 +18,17 @@ module.exports = {
     } catch (error) {
       next(error);
     }
+  },
+
+  deleteMedicine: async (req,res,next) => {
+    try{
+      const medicineId = req.params.medicationId;
+      await medicineModel.deleteMedicine(medicineId);
+      res.status(201).json('Medicine deleted succesfully!');
+    }catch(error){
+      next(error)
+    }
   }
+
+
 };

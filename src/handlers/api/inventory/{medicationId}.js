@@ -3,6 +3,9 @@
 /**
  * Operations on /api/inventory/{medicationId}
  */
+
+const inventoryController = require('../../../controllers/inventoryController');
+
 module.exports = {
     /**
      * summary: Get medication details
@@ -60,14 +63,7 @@ module.exports = {
          * Get the data for response 204
          * For response `default` status 200 is used.
          */
-        var status = 204;
-        var provider = dataProvider['delete']['204'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+
+        return inventoryController.deleteMedicine(req,res,next);  
     }
 };
