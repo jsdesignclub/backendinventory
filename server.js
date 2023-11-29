@@ -5,10 +5,12 @@ const Express = require('express');
 const BodyParser = require('body-parser');
 const Swaggerize = require('swaggerize-express');
 const Path = require('path');
+
 const App = Express();
+const cors = require('cors');
 
 const Server = Http.createServer(App);
-
+App.use(cors());
 App.use(BodyParser.json());
 App.use(BodyParser.urlencoded({
     extended: true

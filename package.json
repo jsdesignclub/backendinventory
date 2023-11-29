@@ -14,13 +14,14 @@
     },
     "dependencies": {
         "body-parser": "^1.15.0",
+        "cors": "^2.8.5",
         "express": "^4.18.2",
         "mysql": "^2.18.1",
         "pg": "^8.11.3",
         "postgres": "^3.4.3",
         "swagger-jsdoc": "^6.2.8",
         "swagger-ui-express": "^5.0.0",
-        "swaggerize-express": "^3.0.3",
+        "swaggerize-express": "^4.0.5",
         "swagmock": "~0.0.2"
     },
     "devDependencies": {
