@@ -41,15 +41,7 @@ module.exports = {
   },
 
 
-getInventoryById: async (req, res, next) => {
-  try {
-    let medicineId =req.params;
-    const medicines = await medicineModel.getMedicineById();
-    res.status(200).json(medicines);
-  } catch (error) {
-    next(error);
-  }
-},
+
 
   deleteMedicine: async (req,res,next) => {
     try{
