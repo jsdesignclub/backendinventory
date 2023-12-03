@@ -1,12 +1,12 @@
-// src/App.js
-
 import React from 'react';
-import InventoryComponent from './components/InventoryComponent';
+
+
+import Dashboard from './components/Dashboard';  // Import the Dashboard component
 
 function App() {
   return (
     <div className="App">
-      <InventoryComponent />
+      <Dashboard />  {/* Render the Dashboard component instead of InventoryComponent */}
     </div>
   );
 }
