@@ -2,9 +2,29 @@ const medicineModel = require('../models/inventoryModel');
 
 module.exports = {
   getInventoryList: async (req, res, next) => {
+    
     try {
-      const medicines = await medicineModel.getAllMedicines();
-      res.status(200).json(medicines);
+      const medicationName = req.query.medicationName;
+      
+      if(!medicationName){
+        const medicines = await medicineModel.getAllMedicines();
+        res.status(200).json(medicines);
+      }else{
+        const medicine = await medicineModel.filterMedicine(medicationName);
+        res.status(200).json(medicine);
+      }     
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getInventoryById: async (req, res, next) => {
+    let medicineId =req.params.medicationId;
+
+    try {
+        const medicines = await medicineModel.getMedicineById(medicineId);
+        res.status(200).send(medicines);     
+      
     } catch (error) {
       next(error);
     }
@@ -21,15 +41,7 @@ module.exports = {
   },
 
 
-getInventoryById: async (req, res, next) => {
-  try {
-    let medicineId =req.params.medicationId;
-    const medicines = await medicineModel.getMedicineById(medicineId);
-    res.status(200).send(medicines);
-  } catch (error) {
-    next(error);
-  }
-},
+
 
   deleteMedicine: async (req,res,next) => {
     try{

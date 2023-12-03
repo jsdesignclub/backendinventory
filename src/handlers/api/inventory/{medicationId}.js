@@ -21,6 +21,10 @@ module.exports = {
       
         return inventoryController.getInventoryById(req, res, next);
     },
+
+
+
+    
     /**
      * summary: Update medication details
      * description: Update the details of a specific medication by ID.
