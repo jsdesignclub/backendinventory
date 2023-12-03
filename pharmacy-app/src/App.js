@@ -1,16 +1,12 @@
-// src/App.js
-
 import React from 'react';
-import InventoryComponent from './components/InventoryComponent';
-import NewMedicine from './components/form/AddMedicineForm';
-import SaleForm from './components/form/SaleForm';
+
+
+import Dashboard from './components/Dashboard';  // Import the Dashboard component
 
 function App() {
   return (
     <div className="App">
-      <NewMedicine/>
-      <SaleForm/>
-      <InventoryComponent />
+      <Dashboard />  {/* Render the Dashboard component instead of InventoryComponent */}
     </div>
   );
 }
