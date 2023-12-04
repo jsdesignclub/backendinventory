@@ -39,6 +39,10 @@ paths:
               expirationDate:
                 type: string
                 format: date
+              manufacturer:
+                type: "string"
+              category:
+                type: "string"
       responses:
         '201':
           description: Medication added successfully
