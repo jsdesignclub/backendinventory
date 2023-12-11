@@ -1,4 +1,5 @@
-// knexfile.js
+// config/knexfile.js
+const path = require('path');
 const config = require('./default.json');
 
 module.exports = {
@@ -11,9 +12,9 @@ module.exports = {
   },
   migrations: {
     tableName: 'knex_migrations',
-    directory: '../migrations',
+    directory: path.join(__dirname, '../migrations'), // Adjust the path accordingly
   },
   seeds: {
-    directory: '../seeds',
+    directory: path.join(__dirname, '../seeds'), // Adjust the path accordingly
   },
 };
