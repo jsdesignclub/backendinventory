@@ -10,7 +10,7 @@ exports.up = function (knex) {
       table.string('manufacturer').notNullable();
       table.string('category').notNullable();
       table.integer('stockLevel').notNullable();
-      table.date('expirationDate').notNullable();
+      table.date('expiration_date').notNullable();
       table.timestamps(true, true);
     });
   };
