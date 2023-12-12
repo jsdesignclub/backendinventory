@@ -1,4 +1,4 @@
-const medicineModel = require('../models/inventoryModel');
+const medicineModel = require('../models/drugModels');
 
 module.exports = {
 //   getInventoryList: async (req, res, next) => {
@@ -58,7 +58,7 @@ module.exports = {
       const medicineId = req.params.drugID;
       const updatedInfo = req.body;
       await medicineModel.updateById(medicineId,updatedInfo);
-      res.status(201).json('Medicine updated successful!')
+      res.status(201).json('Drug record updated successful!')
     }catch(error){
       next(error);
     }
