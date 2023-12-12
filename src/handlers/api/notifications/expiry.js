@@ -1,12 +1,11 @@
 'use strict';
-// var dataProvider = require('../../data/api/billing.js');
 /**
- * Operations on /api/billing
+ * Operations on /api/notifications/expiry
  */
 module.exports = {
     /**
-     * summary: Add a new billing record
-     * description: Add a new billing record for a transaction.
+     * summary: Notify expiry of drugs
+     * description: Notify the front end about expired drugs.
      * parameters: body
      * produces: 
      * responses: 201

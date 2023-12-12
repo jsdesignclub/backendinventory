@@ -1,36 +1,28 @@
 'use strict';
 
-const Http = require('http');
-const Express = require('express');
-const BodyParser = require('body-parser');
-const Swaggerize = require('swaggerize-express');
-const Path = require('path');
+var Http = require('http');
+var Express = require('express');
+var BodyParser = require('body-parser');
+var Swaggerize = require('swaggerize-express');
+var Path = require('path');
 
-const App = Express();
-const cors = require('cors');
+var App = Express();
 
-const Server = Http.createServer(App);
-App.use(cors());
+var Server = Http.createServer(App);
+
 App.use(BodyParser.json());
 App.use(BodyParser.urlencoded({
     extended: true
 }));
 
-const swaggerConfig = {
-    api: Path.resolve('./src/interface/swagger.yaml'),
+App.use(Swaggerize({
+    api: Path.resolve('./config/swagger.yaml'),
     handlers: Path.resolve('./src/handlers')
-};
+}));
 
-App.use(Swaggerize(swaggerConfig));
-
-const apiHost = 'localhost'; // Replace with your actual API host
-const apiPort = 8000; // Replace with your desired port
-
-// Remove the following line since we are not modifying Swagger object
-// App.swagger.api.host = apiHost + ':' + apiPort;
-
-Server.listen(apiPort, function () {
+Server.listen(8000, function () {
+    App.swagger.api.host = this.address().address + ':' + this.address().port;
     /* eslint-disable no-console */
-    console.log('App running on %s:%d', apiHost, apiPort);
+    console.log('App running on %s:%d', this.address().address, this.address().port);
     /* eslint-disable no-console */
 });

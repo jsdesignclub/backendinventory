@@ -1,12 +1,12 @@
 'use strict';
-//var dataProvider = require('../../data/api/prescriptions.js');
+
 /**
- * Operations on /api/prescriptions
+ * Operations on /api/transactions
  */
 module.exports = {
     /**
-     * summary: Get prescription list
-     * description: Retrieve a list of prescriptions.
+     * summary: Get list of transactions
+     * description: Retrieve a list of transactions.
      * parameters: 
      * produces: 
      * responses: 200
@@ -27,8 +27,8 @@ module.exports = {
         });
     },
     /**
-     * summary: Create a new prescription
-     * description: Create a new prescription for a patient.
+     * summary: Add a new transaction
+     * description: Add a new transaction to the pharmacy&#39;s records.
      * parameters: body
      * produces: 
      * responses: 201

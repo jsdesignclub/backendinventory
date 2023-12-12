@@ -1,247 +1,470 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "1.0.0"
-  title: "Pharmacy Management API"
-  description: "API for managing pharmacy operations, including inventory management, prescription processing, billing, and reporting."
-
+  version: 1.0.0
+  title: Pharmacy Management API
+  description: >-
+    API for managing pharmacy operations, including inventory management,
+    prescription processing, billing, reporting, and notifications.
 paths:
+  /api/drugs:
+    get:
+      summary: Get list of drugs
+      description: Retrieve a list of drugs.
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Drug'
+  /api/drugs/{drugID}:
+    put:
+      summary: Update drug details
+      description: Update the details of a specific drug by ID.
+      parameters:
+        - name: drugID
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DrugUpdateInput'
+      responses:
+        '200':
+          description: Drug updated successfully
+        '404':
+          description: Drug not found
+  /api/suppliers:
+    get:
+      summary: Get list of suppliers
+      description: Retrieve a list of suppliers.
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Supplier'
+  /api/suppliers/{supplierID}:
+    put:
+      summary: Update supplier details
+      description: Update the details of a specific supplier by ID.
+      parameters:
+        - name: supplierID
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SupplierUpdateInput'
+      responses:
+        '200':
+          description: Supplier updated successfully
+        '404':
+          description: Supplier not found
   /api/inventory:
     get:
-      summary: "Get inventory list"
-      description: "Retrieve a list of medications in the pharmacy's inventory."
+      summary: Get inventory list
+      description: Retrieve a list of medications in the pharmacy's inventory.
       responses:
-        200:
-          description: "Successful response"
+        '200':
+          description: Successful response
           schema:
-            type: "array"
+            type: array
             items:
-              type: "object"
-              properties:
-                medicationName:
-                  type: "string"
-                stockLevel:
-                  type: "integer"
-
+              $ref: '#/definitions/Inventory'
     post:
-      summary: "Add a new medication to inventory"
-      description: "Add a new medication to the pharmacy's inventory."
+      summary: Add a new medication to inventory
+      description: Add a new medication to the pharmacy's inventory.
       parameters:
-        - name: "body"
-          in: "body"
+        - name: body
+          in: body
           required: true
           schema:
-            type: "object"
-            properties:
-              medicationName:
-                type: "string"
-              stockLevel:
-                type: "integer"
-              expirationDate:
-                type: "string"
-                format: "date"
+            $ref: '#/definitions/InventoryInput'
       responses:
-        201:
-          description: "Medication added successfully"
+        '201':
+          description: Medication added successfully
           schema:
-            type: "object"
-            properties:
-              medicationId:
-                type: "integer"
-
-  /api/inventory/{medicationId}:
-    get:
-      summary: "Get medication details"
-      description: "Retrieve details of a specific medication by ID."
-      parameters:
-        - name: "medicationId"
-          in: "path"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful response"
-          schema:
-            type: "object"
-            properties:
-              medicationName:
-                type: "string"
-              stockLevel:
-                type: "integer"
-              expirationDate:
-                type: "string"
-                format: "date"
-        404:
-          description: "Medication not found"
-
+            $ref: '#/definitions/Inventory'
+  /api/inventory/{inventoryID}:
     put:
-      summary: "Update medication details"
-      description: "Update the details of a specific medication by ID."
+      summary: Update medication details
+      description: Update the details of a specific medication by ID.
       parameters:
-        - name: "medicationId"
-          in: "path"
+        - name: inventoryID
+          in: path
           required: true
-          type: "integer"
-        - name: "body"
-          in: "body"
+          type: integer
+        - name: body
+          in: body
           required: true
           schema:
-            type: "object"
-            properties:
-              medicationName:
-                type: "string"
-              stockLevel:
-                type: "integer"
-              expirationDate:
-                type: "string"
-                format: "date"
+            $ref: '#/definitions/InventoryUpdateInput'
       responses:
-        200:
-          description: "Medication updated successfully"
-        404:
-          description: "Medication not found"
-
-    delete:
-      summary: "Delete medication"
-      description: "Delete a specific medication by ID."
-      parameters:
-        - name: "medicationId"
-          in: "path"
-          required: true
-          type: "integer"
-      responses:
-        204:
-          description: "Medication deleted successfully"
-        404:
-          description: "Medication not found"
-
-  /api/prescriptions:
+        '200':
+          description: Medication updated successfully
+        '404':
+          description: Medication not found
+  /api/transactions:
     get:
-      summary: "Get prescription list"
-      description: "Retrieve a list of prescriptions."
+      summary: Get list of transactions
+      description: Retrieve a list of transactions.
       responses:
-        200:
-          description: "Successful response"
-
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
     post:
-      summary: "Create a new prescription"
-      description: "Create a new prescription for a patient."
+      summary: Add a new transaction
+      description: Add a new transaction to the pharmacy's records.
       parameters:
-        - name: "body"
-          in: "body"
+        - name: body
+          in: body
           required: true
           schema:
-            type: "object"
-            properties:
-              patientName:
-                type: "string"
-              medication:
-                type: "string"
-              dosage:
-                type: "string"
+            $ref: '#/definitions/TransactionInput'
       responses:
-        201:
-          description: "Prescription created successfully"
+        '201':
+          description: Transaction added successfully
           schema:
-            type: "object"
-            properties:
-              prescriptionId:
-                type: "integer"
-
-  /api/prescriptions/{prescriptionId}:
-    get:
-      summary: "Get prescription details"
-      description: "Retrieve details of a specific prescription by ID."
-      parameters:
-        - name: "prescriptionId"
-          in: "path"
-          required: true
-          type: "integer"
-      responses:
-        200:
-          description: "Successful response"
-          schema:
-            type: "object"
-            properties:
-              patientName:
-                type: "string"
-              medication:
-                type: "string"
-              dosage:
-                type: "string"
-        404:
-          description: "Prescription not found"
-
+            $ref: '#/definitions/Transaction'
+  /api/transactions/{transactionID}:
     put:
-      summary: "Update prescription details"
-      description: "Update the details of a specific prescription by ID."
+      summary: Update transaction details
+      description: Update the details of a specific transaction by ID.
       parameters:
-        - name: "prescriptionId"
-          in: "path"
+        - name: transactionID
+          in: path
           required: true
-          type: "integer"
-        - name: "body"
-          in: "body"
+          type: integer
+        - name: body
+          in: body
           required: true
           schema:
-            type: "object"
-            properties:
-              patientName:
-                type: "string"
-              medication:
-                type: "string"
-              dosage:
-                type: "string"
+            $ref: '#/definitions/TransactionUpdateInput'
       responses:
-        200:
-          description: "Prescription updated successfully"
-        404:
-          description: "Prescription not found"
-
-    delete:
-      summary: "Delete prescription"
-      description: "Delete a specific prescription by ID."
-      parameters:
-        - name: "prescriptionId"
-          in: "path"
-          required: true
-          type: "integer"
-      responses:
-        204:
-          description: "Prescription deleted successfully"
-        404:
-          description: "Prescription not found"
-
-  /api/billing:
-    post:
-      summary: "Add a new billing record"
-      description: "Add a new billing record for a transaction."
-      parameters:
-        - name: "body"
-          in: "body"
-          required: true
-          schema:
-            type: "object"
-            properties:
-              transactionId:
-                type: "integer"
-              amount:
-                type: "number"
-              date:
-                type: "string"
-                format: "date"
-      responses:
-        201:
-          description: "Billing record added successfully"
-          schema:
-            type: "object"
-            properties:
-              billingRecordId:
-                type: "integer"
-
-  /api/reports:
+        '200':
+          description: Transaction updated successfully
+        '404':
+          description: Transaction not found
+  /api/daily-reports:
     get:
-      summary: "Get reports"
-      description: "Retrieve various reports."
+      summary: Get list of daily reports
+      description: Retrieve a list of daily reports.
       responses:
-        200:
-          description: "Successful response"
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DailyReport'
+    post:
+      summary: Add a new daily report
+      description: Add a new daily report to the pharmacy's records.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DailyReportInput'
+      responses:
+        '201':
+          description: Daily report added successfully
+          schema:
+            $ref: '#/definitions/DailyReport'
+  /api/daily-reports/{reportID}:
+    put:
+      summary: Update daily report details
+      description: Update the details of a specific daily report by ID.
+      parameters:
+        - name: reportID
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/DailyReportUpdateInput'
+      responses:
+        '200':
+          description: Daily report updated successfully
+        '404':
+          description: Daily report not found
+  /api/monthly-reports:
+    get:
+      summary: Get list of monthly reports
+      description: Retrieve a list of monthly reports.
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/MonthlyReport'
+    post:
+      summary: Add a new monthly report
+      description: Add a new monthly report to the pharmacy's records.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MonthlyReportInput'
+      responses:
+        '201':
+          description: Monthly report added successfully
+          schema:
+            $ref: '#/definitions/MonthlyReport'
+  /api/monthly-reports/{reportID}:
+    put:
+      summary: Update monthly report details
+      description: Update the details of a specific monthly report by ID.
+      parameters:
+        - name: reportID
+          in: path
+          required: true
+          type: integer
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/MonthlyReportUpdateInput'
+      responses:
+        '200':
+          description: Monthly report updated successfully
+        '404':
+          description: Monthly report not found
+  /api/notifications/expiry:
+    post:
+      summary: Notify expiry of drugs
+      description: Notify the front end about expired drugs.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationInput'
+      responses:
+        '201':
+          description: Notification sent successfully
+  /api/notifications/reorder:
+    post:
+      summary: Notify reorder points
+      description: Notify the front end about drugs reaching reorder points.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/NotificationInput'
+      responses:
+        '201':
+          description: Notification sent successfully
+definitions:
+  Drug:
+    type: object
+    properties:
+      DrugID:
+        type: integer
+      DrugName:
+        type: string
+      Manufacturer:
+        type: string
+      Dosage:
+        type: string
+      UnitPrice:
+        type: number
+      ExpiryDate:
+        type: string
+        format: date
+  DrugUpdateInput:
+    type: object
+    properties:
+      UnitPrice:
+        type: number
+      ExpiryDate:
+        type: string
+        format: date
+  Supplier:
+    type: object
+    properties:
+      SupplierID:
+        type: integer
+      SupplierName:
+        type: string
+      ContactPerson:
+        type: string
+      ContactNumber:
+        type: string
+      Email:
+        type: string
+  SupplierUpdateInput:
+    type: object
+    properties:
+      ContactNumber:
+        type: string
+      Email:
+        type: string
+  Inventory:
+    type: object
+    properties:
+      InventoryID:
+        type: integer
+      DrugID:
+        type: integer
+      StockLevel:
+        type: integer
+      ReorderPoint:
+        type: integer
+      LastUpdated:
+        type: string
+        format: date-time
+  InventoryInput:
+    type: object
+    properties:
+      DrugID:
+        type: integer
+      StockLevel:
+        type: integer
+      ReorderPoint:
+        type: integer
+  InventoryUpdateInput:
+    type: object
+    properties:
+      StockLevel:
+        type: integer
+      ReorderPoint:
+        type: integer
+  Transaction:
+    type: object
+    properties:
+      TransactionID:
+        type: integer
+      DrugID:
+        type: integer
+      TransactionType:
+        type: string
+      QuantityIn:
+        type: integer
+      QuantityOut:
+        type: integer
+      TransactionDate:
+        type: string
+        format: date-time
+      CostOfProduction:
+        type: number
+  TransactionInput:
+    type: object
+    properties:
+      DrugID:
+        type: integer
+      TransactionType:
+        type: string
+      QuantityIn:
+        type: integer
+      QuantityOut:
+        type: integer
+      CostOfProduction:
+        type: number
+  TransactionUpdateInput:
+    type: object
+    properties:
+      QuantityIn:
+        type: integer
+      QuantityOut:
+        type: integer
+      CostOfProduction:
+        type: number
+  DailyReport:
+    type: object
+    properties:
+      ReportID:
+        type: integer
+      DrugID:
+        type: integer
+      ReportDate:
+        type: string
+        format: date
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  DailyReportInput:
+    type: object
+    properties:
+      DrugID:
+        type: integer
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  DailyReportUpdateInput:
+    type: object
+    properties:
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  MonthlyReport:
+    type: object
+    properties:
+      ReportID:
+        type: integer
+      DrugID:
+        type: integer
+      Year:
+        type: integer
+      Month:
+        type: integer
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  MonthlyReportInput:
+    type: object
+    properties:
+      DrugID:
+        type: integer
+      Year:
+        type: integer
+      Month:
+        type: integer
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  MonthlyReportUpdateInput:
+    type: object
+    properties:
+      StockLevel:
+        type: integer
+      CostOfProduction:
+        type: number
+      Profit:
+        type: number
+  NotificationInput:
+    type: object
+    properties:
+      Message:
+        type: string
+      Timestamp:
+        type: string
+        format: date-time
