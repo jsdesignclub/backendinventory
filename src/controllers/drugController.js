@@ -1,4 +1,4 @@
-const medicineModel = require('../models/inventoryModel');
+const medicineModel = require('../models/drugModels');
 
 module.exports = {
 //   getInventoryList: async (req, res, next) => {

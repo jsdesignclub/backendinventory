@@ -1,6 +1,6 @@
 // inventoryModel.js
 const knexConfig = require('../../config/knexfile');
-const MedicationId = require('../handlers/api/inventory/{medicationId}');
+const MedicationId = require('../handlers/api/drugs/{drugID}');
 const knex = require('knex')(knexConfig);
 
 module.exports = {
@@ -56,7 +56,7 @@ module.exports = {
 
   updateById: async (medicineId,updatedData) => {
     try{
-      await knex('medicines').where({id:medicineId}).update(updatedData);
+      await knex('drugs').where({DrugID:medicineId}).update(updatedData);
     }catch(error){
       throw error;
     }
