@@ -1,5 +1,7 @@
 'use strict';
 
+const transactionsController = require('../../controllers/transactionControler');
+
 /**
  * Operations on /api/transactions
  */
@@ -16,15 +18,7 @@ module.exports = {
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 200;
-        var provider = dataProvider['get']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        return transactionsController.getAllTransaction(req,res,next);
     },
     /**
      * summary: Add a new transaction
@@ -38,14 +32,7 @@ module.exports = {
          * Get the data for response 201
          * For response `default` status 200 is used.
          */
-        var status = 201;
-        var provider = dataProvider['post']['201'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        
+        return transactionsController.postTransaction(req,res,next);
     }
 };
