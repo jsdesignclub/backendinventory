@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+//css file form
+import './Inventory.css';
 
 const InventoryComponent = () => {
   const [inventory, setInventory] = useState([]);
@@ -23,6 +25,11 @@ const InventoryComponent = () => {
 
   const toggleForm = () => {
     setShowForm(!showForm);
+  };
+
+  //close button
+  const handleClose = () => {
+    setShowForm(false)
   };
 
   const handleInputChange = (e) => {
@@ -52,10 +59,15 @@ const InventoryComponent = () => {
   return (
     <div>
       <h1>Pharmacy Inventory</h1>
+
+      {/* search imedicine */}
+      <input class="searchbar-input" dir="auto" placeholder="Search" type="search" autocomplete="on" autocorrect="on" spellcheck="false"></input>
+
       <button onClick={toggleForm}>Toggle Form</button>
       {showForm && (
         <div>
           <h2>Add New Inventory</h2>
+          <div class='popupForm'>
           <form>
             <label>Medication Name:
               <input type="text" name="medicationName" value={newInventoryData.medicationName} onChange={handleInputChange} />
@@ -77,8 +89,12 @@ const InventoryComponent = () => {
               <input type="date" name="expirationDate" value={newInventoryData.expirationDate} onChange={handleInputChange} />
             </label>
             <br />
-            <button type="button" onClick={addNewInventory}>Add Inventory</button>
+              <div className='formButton'>
+                <button type="add" onClick={addNewInventory}>Add Inventory</button>
+                <button type="close" onClick={handleClose}>Close </button>
+              </div>
           </form>
+          </div>
         </div>
       )}
       <ul>

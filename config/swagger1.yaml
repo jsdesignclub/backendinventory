@@ -288,10 +288,6 @@ definitions:
   DrugUpdateInput:
     type: object
     properties:
-      DrugName:
-        type: string
-      Manufacturer:
-        type: string
       UnitPrice:
         type: number
       ExpiryDate:

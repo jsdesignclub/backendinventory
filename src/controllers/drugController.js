@@ -1,22 +1,26 @@
-const medicineModel = require('../models/drugModels');
+const drugModels = require('../models/drugModels');
+// const medicineModel = require('../models/drugModels');
 
 module.exports = {
-//   getInventoryList: async (req, res, next) => {
+  getDrugsList: async (req, res, next) => {
     
-//     try {
-//       const medicationName = req.query.medicationName;
+    try {
+      const DrugName = req.query.drugName;      
+      if(DrugName ){
+        console.log(`we are in${DrugName}`)  
+        const medicine = await drugModels.filterDrug(DrugName);
+        res.status(200).json(medicine);     
       
-//       if(!medicationName){
-//         const medicines = await medicineModel.getAllMedicines();
-//         res.status(200).json(medicines);
-//       }else{
-//         const medicine = await medicineModel.filterMedicine(medicationName);
-//         res.status(200).json(medicine);
-//       }     
-//     } catch (error) {
-//       next(error);
-//     }
-//   },
+      }else{
+        console.log('no filter')
+        const medicines = await drugModels.getDrugsList();
+        res.status(200).json(medicines);
+        
+      }     
+    } catch (error) {
+      next(error);
+    }
+  },
 
 //   getInventoryById: async (req, res, next) => {
 //     let medicineId =req.params.medicationId;
@@ -30,15 +34,15 @@ module.exports = {
 //     }
 //   },
 
-//   addMedicineToInventory: async (req, res, next) => {
-//     try {
-//       const newMedicine = req.body; // Assuming the request body contains the new medicine details
-//       await medicineModel.addMedicine(newMedicine);
-//       res.status(201).send('Medicine added to inventory successfully');
-//     } catch (error) {
-//       next(error);
-//     }
-//   },
+  // addDrugToDrugs: async (req, res, next) => {
+  //   try {
+  //     const newDrug = req.body; // Assuming the request body contains the new medicine details
+  //     await drugModels.addDrug(newDrug);
+  //     res.status(201).send('Drug added to dragr successfully');
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // },
 
 
 
@@ -54,11 +58,18 @@ module.exports = {
 //   },
 
   updateDrug: async (req,res,next) => {
+    
     try{
       const medicineId = req.params.drugID;
       const updatedInfo = req.body;
-      await medicineModel.updateById(medicineId,updatedInfo);
-      res.status(201).json('Drug record updated successful!')
+      if (medicineId ) {
+        await drugModels.updateById(medicineId,updatedInfo);
+        res.status(201).json('Drug record updated successful!')
+      }
+     else{
+      await drugModels.addDrug(newDrug);
+      res.status(201).send('Drug added to drug successfully');
+     }
     }catch(error){
       next(error);
     }
