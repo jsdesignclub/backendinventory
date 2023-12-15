@@ -1,5 +1,6 @@
 'use strict';
 
+const drugController = require('../../controllers/drugController');
 /**
  * Operations on /api/drugs
  */
@@ -16,14 +17,27 @@ module.exports = {
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 200;
-        var provider = dataProvider['get']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
-    }
+        return drugController.getDrugsList(req, res, next);
+        // const status = 200;
+        // const provider = dataProvider['get']['200'];
+        // provider(req, res, function (err, data) {
+        //     if (err) {
+        //         next(err);
+        //         return;
+        //     }
+        //     res.status(status).send(data && data.responses);
+        // });
+    },
+
+     /**
+     * summary: Add a new medication to inventory
+     * description: Add a new medication to the pharmacy&#39;s inventory.
+     * parameters: body
+     * produces: 
+     * responses: 201
+     */
+    //  post: (req, res, next) => {
+    //     res.status(200).send('helooooo')
+    //     return drugController.addDrugToDrugs(req, res, next);
+    //   }
 };

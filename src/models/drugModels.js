@@ -5,25 +5,24 @@ const knex = require('knex')(knexConfig);
 
 module.exports = {
 
-//   getAllMedicines: async () => {
-//     try {
-//       const medicines = await knex.select('*').from('medicines');
-//       return medicines;
-//     } catch (error) {
-//       throw error;
-//     }
-//   },
+  getDrugsList: async () => {
+    try {
+      const drugs = await knex.select('*').from('drugs');
+      return drugs;
+    } catch (error) {
+      throw error;
+    }
+  },
 
 
-//   filterMedicine: async (medicalName) => {
-//    try{
-//     const result = await knex.select('*').from('medicines').where('medicationName',medicalName);
-//     return result;
-    
-//    }catch(error) {
-//     throw error;
-//   }
-//   }, 
+  filterDrug: async (DrugName) => {
+   try{
+    const result = await knex.select('*').from('drugs').where('DrugName',DrugName);
+    return result;
+   }catch(error) {
+    throw error;
+  }
+  }, 
 
 //   getMedicineById:async(medicineId)=>{
 //     try{
@@ -36,13 +35,13 @@ module.exports = {
 
   
 
-//   addMedicine: async (medicine) => {
-//     try {
-//       await knex('medicines').insert(medicine);
-//     } catch (error) {
-//       throw error;
-//     }
-//   },
+  addDrug: async (newDrug) => {
+    try {
+      await knex('drugs').insert(newDrug);
+    } catch (error) {
+      throw error;
+    }
+  },
 
 
 
