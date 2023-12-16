@@ -3,7 +3,21 @@
 /**
  * Operations on /api/inventory/{inventoryID}
  */
+
+const inventoryController = require('../../../controllers/inventoryController');
 module.exports = {
+   
+    get: function (req, res, next) {
+        /**
+         * Get the data for response 200
+         * For response `default` status 200 is used.
+         */
+         console.log('hellooooooo')
+        return  inventoryController.getInventoryById(req, res, next);
+       
+    },
+
+
     /**
      * summary: Update medication details
      * description: Update the details of a specific medication by ID.
@@ -16,14 +30,18 @@ module.exports = {
          * Get the data for response 200
          * For response `default` status 200 is used.
          */
-        var status = 200;
-        var provider = dataProvider['put']['200'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
+        return inventoryController.updateInventory(req,res,next);
     }
 };
+
+
+
+
+  
+
+
+
+    
+  
+
+
