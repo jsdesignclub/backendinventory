@@ -1,0 +1,38 @@
+form{
+    max-width: 250px;
+	background: #FAFAFA;
+	padding: 30px;
+	margin: 10px auto;
+	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+	border-radius: 10px;
+	border: 6px solid #305A72;
+}
+
+input{
+    display: block;
+	margin-bottom: 10px;
+	min-height: 35px;
+}
+h4{
+    text-align: center;
+}
+/* .btn button{
+    width: 30%;
+    margin: 10px auto;
+    margin-bottom: 0;
+    border: 3px solid rgb(9, 109, 51);
+    background: #305A72;
+    padding: 2px;
+    border-radius: 15px;
+    }
+.btn {
+    display: flex;
+    width: calc(100% 10px);    
+    justify-content: space-between;
+} */
+
+.formButton {
+    display: grid;
+    grid-template-columns: repeat(n, 1fr);
+    gap: 10px;
+}
