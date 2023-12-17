@@ -17,6 +17,20 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Drug'
+    post:
+      summary: Add a new drug.
+      description: Add a new drugg.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Drug'
+      responses:
+        '201':
+          description: Drag added successfully
+          schema:
+            $ref: '#/definitions/Drug'
   '/api/drugs/{drugID}':
     put:
       summary: Update drug details
@@ -282,6 +296,8 @@ definitions:
         type: string
       UnitPrice:
         type: number
+      SellingPrice:
+        type: number
       ExpiryDate:
         type: string
         format: date
@@ -292,7 +308,11 @@ definitions:
         type: string
       Manufacturer:
         type: string
+      Dosage:
+        type: string
       UnitPrice:
+        type: number
+      SellingPrice:
         type: number
       ExpiryDate:
         type: string

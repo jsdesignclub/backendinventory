@@ -18,15 +18,7 @@ module.exports = {
          * For response `default` status 200 is used.
          */
         return drugController.getDrugsList(req, res, next);
-        // const status = 200;
-        // const provider = dataProvider['get']['200'];
-        // provider(req, res, function (err, data) {
-        //     if (err) {
-        //         next(err);
-        //         return;
-        //     }
-        //     res.status(status).send(data && data.responses);
-        // });
+        
     },
 
      /**
@@ -36,8 +28,7 @@ module.exports = {
      * produces: 
      * responses: 201
      */
-    //  post: (req, res, next) => {
-    //     res.status(200).send('helooooo')
-    //     return drugController.addDrugToDrugs(req, res, next);
-    //   }
+     post: (req, res, next) => {
+        return drugController.addDrugToDrugs(req, res, next);
+      }
 };
