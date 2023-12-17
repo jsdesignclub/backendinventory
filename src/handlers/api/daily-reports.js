@@ -2,6 +2,8 @@
 /**
  * Operations on /api/daily-reports
  */
+
+const dailyController = require('../../controllers/reportController')
 module.exports = {
     /**
      * summary: Get list of daily reports
@@ -32,19 +34,12 @@ module.exports = {
      * produces: 
      * responses: 201
      */
-    post: function (req, res, next) {
+    post: (req, res, next)=> {
         /**
          * Get the data for response 201
          * For response `default` status 200 is used.
          */
-        var status = 201;
-        var provider = dataProvider['post']['201'];
-        provider(req, res, function (err, data) {
-            if (err) {
-                next(err);
-                return;
-            }
-            res.status(status).send(data && data.responses);
-        });
-    }
+        return dailyController.createDailyReport(req,res,next)
+
+    }   
 };
