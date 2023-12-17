@@ -1,6 +1,5 @@
 // inventoryModel.js
 const knexConfig = require('../../config/knexfile');
-const MedicationId = require('../handlers/api/drugs/{drugID}');
 const knex = require('knex')(knexConfig);
 
 module.exports = {
