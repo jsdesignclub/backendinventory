@@ -1,21 +1,22 @@
+// const drugs = require('../handlers/api/drugs');
 const drugModels = require('../models/drugModels');
-// const medicineModel = require('../models/drugModels');
+// const drug = require('../models/drugModels')
+
 
 module.exports = {
-  getDrugsList: async (req, res, next) => {
-    
+  getDrugsList: async (req,res,next) =>{
+    console.log('kitweman')
     try {
-      const DrugName = req.query.drugName;      
-      if(DrugName ){
-        console.log(`we are in${DrugName}`)  
-        const medicine = await drugModels.filterDrug(DrugName);
+      const drugName = req.query.drugName;      
+      if(drugName ){
+        const medicine = await drugModels.filterDrug(drugName);
         res.status(200).json(medicine);     
       
       }else{
         console.log('no filter')
         const medicines = await drugModels.getDrugsList();
         res.status(200).json(medicines);
-        
+        console.log('mwisho')
       }     
     } catch (error) {
       next(error);
@@ -62,14 +63,26 @@ module.exports = {
     try{
       const medicineId = req.params.drugID;
       const updatedInfo = req.body;
+
       if (medicineId ) {
+        //update existing drug record
         await drugModels.updateById(medicineId,updatedInfo);
         res.status(201).json('Drug record updated successful!')
-      }
-     else{
+
+      } else {
+        //add a new drug record
+      const newDrug=req.body;
+      //chhek if similar drug already exists
+      const existingDrug = await drugModels.findDrugByInfo(newDrug)
+      if(existingDrug){
+        //drug already exists, handle accodingly
+        res.status(400).json('Duplicate drug record found!')
+      }else{
+        //Drug not exist proceed with adding
       await drugModels.addDrug(newDrug);
       res.status(201).send('Drug added to drug successfully');
      }
+    }
     }catch(error){
       next(error);
     }

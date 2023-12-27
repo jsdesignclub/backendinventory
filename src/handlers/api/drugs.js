@@ -21,4 +21,14 @@ module.exports = {
         
     },
 
+     /**
+     * summary: Add a new medication to inventory
+     * description: Add a new medication to the pharmacy&#39;s inventory.
+     * parameters: body
+     * produces: 
+     * responses: 201
+     */
+     post: (req, res, next) => {
+        return drugController.addDrugToDrugs(req, res, next);
+      }
 };

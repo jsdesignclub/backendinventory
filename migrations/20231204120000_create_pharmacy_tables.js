@@ -8,6 +8,7 @@ exports.up = function (knex) {
         table.string('Manufacturer').notNullable();
         table.string('Dosage').notNullable();
         table.decimal('UnitPrice', 10, 2).notNullable();
+        table.decimal('SellingPrice', 10, 2).notNullable();
         table.date('ExpiryDate').notNullable();
       }),
   

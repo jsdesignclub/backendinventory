@@ -14,9 +14,9 @@ module.exports = {
   },
 
 
-  filterDrug: async (DrugName) => {
+  filterDrug: async (drugName) => {
    try{
-    const result = await knex.select('*').from('drugs').where('DrugName',DrugName);
+    const result = await knex.select('*').from('drugs').where('DrugName',drugName);
     return result;
    }catch(error) {
     throw error;
@@ -59,5 +59,4 @@ module.exports = {
       throw error;
     }
   }
-
 };
