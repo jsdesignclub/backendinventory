@@ -5,18 +5,21 @@ const drugModels = require('../models/drugModels');
 
 module.exports = {
   getDrugsList: async (req,res,next) =>{
-    console.log('kitweman')
+    console.log('**** Before filter*****')
     try {
       const drugName = req.query.drugName;      
       if(drugName ){
         const medicine = await drugModels.filterDrug(drugName);
+        console.log('Drug details::',medicine)
         res.status(200).json(medicine);     
       
       }else{
-        console.log('no filter')
+       
         const medicines = await drugModels.getDrugsList();
+        console.log('List of drugs:::', medicines)
         res.status(200).json(medicines);
-        console.log('mwisho')
+       
+       
       }     
     } catch (error) {
       next(error);

@@ -13,6 +13,7 @@ module.exports = {
     postTransaction: async (req,res,next) => {
         try{
           await transactionModel.postTransaction(req.body);
+          
           res.status(201).json('Transaction Added successfully');
         }catch(error){
           next(error);
