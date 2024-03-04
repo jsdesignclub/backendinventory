@@ -3,10 +3,7 @@
 var Http = require('http');
 var Express = require('express');
 const cors = require('cors');
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 var BodyParser = require('body-parser');
 var Swaggerize = require('swaggerize-express');
 var Path = require('path');
@@ -14,10 +11,8 @@ var Path = require('path');
 var App = Express();
 
 var Server = Http.createServer(App);
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
+
 App.use(cors());
 App.use(BodyParser.json());
 App.use(BodyParser.urlencoded({
