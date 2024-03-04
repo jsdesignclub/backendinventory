@@ -14,10 +14,11 @@ import {
   Paper,
   Toolbar,
   Typography,
+  
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/system';
-
+import { Box,  InputBase, Badge } from "@mui/material";
 import Billing from './Billing';
 import Inventory from './Inventory';
 import Patients from './Patients';
@@ -26,6 +27,21 @@ import Tasks from './Tasks';
 import Services from './Services'; // Import the Services component
 import Sales from './Sales'; // Import the Sales component
 import Prescriptions from './Prescriptions'; // Import the Prescriptions component
+import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import CardMedia from '@mui/material/CardMedia';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import MailIcon from '@mui/icons-material/Mail';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+
+
+
+
+
 
 const drawerWidth = 240;
 
@@ -33,6 +49,14 @@ const Root = styled('div')({
   display: 'flex',
   minHeight: '100vh',  // Set minHeight to '100vh' for full height
 });
+const SearchIcon=styled("div")(({theme}) =>({
+  backgroundColor:"white",
+  padding:"0 10px",
+  borderRadius:theme.shape.borderRadius,
+  width:"30%",
+  display:"flex"
+
+}))
 
 const AppBarStyled = styled(AppBar)({
   zIndex: (theme) => theme.zIndex.drawer + 1,
@@ -73,8 +97,14 @@ const Logo = styled('img')({
   marginTop: (theme) => theme.spacing(2),
   marginBottom: (theme) => theme.spacing(4),
   display: 'block',
-  marginBottom: '20px', 
+   
 });
+const Icon=styled(Box)(({theme}) =>({
+  display:"flex",
+  gap:"20px",
+  alignItems:"center"
+
+}))
 
 
 
@@ -106,7 +136,7 @@ const Dashboard = () => {
       case 'billing':
         return <Billing />;
       case 'inventory':
-        return <Inventory />;
+        return <Inventory/>;
       case 'patients':
         return <Patients />;
       case 'reports':
@@ -125,7 +155,7 @@ const Dashboard = () => {
   };
 
   const menuItems = [
-    { id: 'billing', label: 'Billing' },
+    { id: 'billing', label: 'Billing'  },
     { id: 'inventory', label: 'Inventory' },
     { id: 'patients', label: 'Patients' },
     { id: 'reports', label: 'Reports' },
@@ -138,16 +168,7 @@ const Dashboard = () => {
   return (
     <Root>
       <CssBaseline />
-      <AppBarStyled position="fixed">
-        <Toolbar>
-          <MenuIconButton color="inherit" edge="start">
-            <MenuIcon />
-          </MenuIconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Pharmacy Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBarStyled>
+      
       <DrawerStyled
         anchor="left"
         open
@@ -159,11 +180,24 @@ const Dashboard = () => {
           flexDirection: 'column',
         }}
       >
-        <Logo src="../../public/logo512.png" alt="Logo" />
+         <CardMedia
+        component="img"
+        alt="green iguana"
+        height="100"
+        
+        image="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWNhdGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+      />
+         {/* <Logo  component="img" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpngtree.com%2Fso%2Fmedical-logo&psig=AOvVaw3rDqbkUgv3_KhD6qBngKQd&ust=1704721737523000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCKDF6MO1y4MDFQAAAAAdAAAAABAJ" alt="Logo"  /> */}
         <List>
+          
           {menuItems.map((item) => (
+            
             <ListItem button key={item.id} onClick={() => setSelectedSection(item.id)}>
+               <ListItemIcon>
+                <InventoryIcon/>
+             </ListItemIcon>
               <ListItemText primary={item.label} />
+             
             </ListItem>
           ))}
         </List>
@@ -176,19 +210,40 @@ const Dashboard = () => {
                 <SectionTitle variant="h5" gutterBottom>
                   Stock Summary
                 </SectionTitle>
-                <Typography variant="body1">
-                  Placeholder content for stock summary. Replace with actual content.
-                </Typography>
+<Box position={'center'} flex={2} p={2} ></Box>           
+
               </SummaryPaper>
             </Grid>
+            
             <Grid item xs={12} md={6}>
               <SummaryPaper>
                 <SectionTitle variant="h5" gutterBottom>
                   Sales Summary
                 </SectionTitle>
-                <Typography variant="body1">
-                  Placeholder content for sales summary. Replace with actual content.
-                </Typography>
+                <Box position={'center'} flex={2} p={2} ></Box> 
+                <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        alt="green iguana"
+        height="200"
+        
+       
+        image="https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWVkaWNhdGlvbnxlbnwwfHwwfHx8MA%3D%3D"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          Medicine
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          medicine are Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eveniet, quasi! In, reiciendis iste. Voluptas tenetur incidunt, nemo aspernatur, soluta iusto ab ea veritatis accusamus porro quos! Aspernatur iste minima reiciendis!a widespread group of squamate reptiles, with over 6,000
+          species, ranging across all continents except Antarctica
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Share</Button>
+        <Button size="small">Learn More</Button>
+      </CardActions>
+    </Card>
               </SummaryPaper>
             </Grid>
           </Grid>

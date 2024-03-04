@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 /**
  * Operations on /api/inventory/{inventoryID}
@@ -32,15 +32,5 @@ module.exports = {
         return inventoryController.updateInventory(req,res,next);
     }
 };
-
-
-
-
-  
-
-
-
-    
-  
 
 

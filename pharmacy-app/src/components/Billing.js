@@ -6,6 +6,7 @@ const Billing = () => {
     <div>
       <h2>Billing Section</h2>
       {/* Add your billing-related content here */}
+      
     </div>
   );
 };
