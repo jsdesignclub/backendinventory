@@ -3,11 +3,11 @@
   "db": {
       "host": "localhost",
       "user": "postgres",
-<<<<<<< Updated upstream
-      "password": "db@123",
-=======
+
+      
+
       "password": "2850",
->>>>>>> Stashed changes
+
       "database": "pharmacydb"
   }
 }
