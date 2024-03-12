@@ -20,13 +20,13 @@ module.exports = {
                 if(transaction.TransactionType==='Purchase'){
                     await knex('inventory').transacting(trx)
                     .where('DrugID', transaction.DrugID)
-                    .increment('StockLevel', transaction.QuantityIn);
+                    //.increment('StockLevel', transaction.QuantityIn);
     
                     console.log('Transaction and inventory update successful');
                 }else{
                     await knex('inventory').transacting(trx)
-                    .where('DrugID', transaction.DrugID)
-                    .decrement('StockLevel', transaction.QuantityOut);
+                    .where('DrugID', transaction.DrugID);
+                   // .decrement('StockLevel', transaction.QuantityOut);
                 }
                 
             });
