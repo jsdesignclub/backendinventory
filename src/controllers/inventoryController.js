@@ -48,7 +48,7 @@ addnewInventory: async (req, res, next) => {
     try{
       const inventoryId = req.params.inventoryID;
       const updatedInfo = req.body;
-      console.log('updated info::${}', updatedInfo)
+      console.log('updated info::', updatedInfo)
       
       await medicineModel.updateById(inventoryId,updatedInfo);
       res.status(201).json('inventory updated successful!')
