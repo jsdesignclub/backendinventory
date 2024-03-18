@@ -21,10 +21,12 @@ App.use(Swaggerize({
     api: Path.resolve('./config/swagger.yaml'),
     handlers: Path.resolve('./src/handlers')
 }));
+const PORT = process.env.PORT || 8000; // Use the provided port or default to 8000
 
-Server.listen(8000, function () {
+Server.listen(PORT, function () {
     App.swagger.api.host = this.address().address + ':' + this.address().port;
     /* eslint-disable no-console */
     console.log('App running on %s:%d', this.address().address, this.address().port);
-    /* eslint-disable no-console */
+    /* eslint-enable no-console */
 });
+
