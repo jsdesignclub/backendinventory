@@ -3,10 +3,8 @@ const knex = require('knex')(knexConfig);
 
 module.exports = {
     getAllTransaction: async () =>{
-        try{   
-          const transactions = await knex.select('transactions.*','drugs.DrugName')
-          .from('transactions')
-        .join('drugs', 'transactions.DrugID', '=', 'drugs.DrugID');
+        try{
+          const transactions = await knex.select('*').from('transactions');
           return transactions;
         }catch(error){
           throw error;
