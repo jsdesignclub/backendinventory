@@ -3,6 +3,7 @@ const transactionModel = require('../models/transactionModels');
 module.exports = {
     getAllTransaction: async (req,res,next) => {
         try{
+          
           const transactions = await  transactionModel.getAllTransaction();
           res.status(201).json(transactions);
         }catch(error){

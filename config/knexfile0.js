@@ -1,14 +1,13 @@
-// config/knexfile.js
+
 const path = require('path');
-const config = require('./default.json');
 
 module.exports = {
   client: 'pg',
-  connection: {
-    host: config.db.host,
-    user: config.db.user,
-    password: config.db.password,
-    database: config.db.database,
+  connection: process.env.DATABASE_URL || {
+    connectionString: 'postgres://mgaciqwnkxnpni:eb88ea4662a1051bd0720eee6af11d58138ddb8f291a72010a3ac4c928b337cb@ec2-52-73-67-148.compute-1.amazonaws.com:5432/dfhqldkos3bb36',
+    ssl: {
+      rejectUnauthorized: false
+    }
   },
   migrations: {
     tableName: 'knex_migrations',

@@ -1,9 +1,0 @@
-
-{
-  "db": {
-      "host": "localhost",
-      "user": "postgres",
-      "password": "db@123",
-      "database": "pharmacydb"
-  }
-}
