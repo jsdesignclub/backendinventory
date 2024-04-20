@@ -1,4 +1,7 @@
-// migrations/20231204120000_create_pharmacy_tables.js
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
 exports.up = function (knex) {
     return Promise.all([
       // Drugs Table
@@ -67,8 +70,13 @@ exports.up = function (knex) {
       }),
     ]);
   };
-  
-  exports.down = function (knex) {
+
+/**
+ * @param { import("knex").Knex } knex
+ * @returns { Promise<void> }
+ */
+
+exports.down = function (knex) {
     return Promise.all([
       knex.schema.dropTable('monthly_reports'),
       knex.schema.dropTable('daily_reports'),

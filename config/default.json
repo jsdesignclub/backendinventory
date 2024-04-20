@@ -3,11 +3,7 @@
   "db": {
       "host": "localhost",
       "user": "postgres",
-
-      
-
       "password": "2850",
-
       "database": "pharmacydb"
   }
 }
